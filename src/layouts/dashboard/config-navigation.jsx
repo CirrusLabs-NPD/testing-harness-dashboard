@@ -8,20 +8,35 @@ const icon = (name) => (
 
 const navConfig = [
   {
-    title: 'dashboard',
+    title: 'Dashboard',
     path: '/',
     icon: icon('ic_analytics'),
   },
   {
-    title: 'user',
-    path: '/user',
-    icon: icon('ic_user'),
+    title: 'Object Detection',
+    path: '/Object-Detection',
+    icon: icon('ic_analytics'),
   },
   {
-    title: 'product',
-    path: '/products',
-    icon: icon('ic_cart'),
+    title: 'Hate Speech detection',
+    path: '/Hate-Speech-detection',
+    icon: icon('ic_analytics'),
   },
+  {
+    title: 'Machine Translation',
+    path: '/Machine-Translation',
+    icon: icon('ic_analytics'),
+  },
+  // {
+  //   title: 'user',
+  //   path: '/user',
+  //   icon: icon('ic_user'),
+  // },
+  // {
+  //   title: 'product',
+  //   path: '/products',
+  //   icon: icon('ic_cart'),
+  // },
   {
     title: 'blog',
     path: '/blog',
@@ -32,11 +47,11 @@ const navConfig = [
     path: '/login',
     icon: icon('ic_lock'),
   },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: icon('ic_disabled'),
-  },
+  // {
+  //   title: 'Not found',
+  //   path: '/404',
+  //   icon: icon('ic_disabled'),
+  // },
 ];
 
 export default navConfig;

@@ -2,6 +2,9 @@ import { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 import DashboardLayout from 'src/layouts/dashboard';
+import ObjectDetectionPage from 'src/pages/object-detection';
+import MachineTranslationPage from 'src/pages/machine-translation';
+import HateSpeechDetectionPage from 'src/pages/hate-speech-detection';
 
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
@@ -26,6 +29,9 @@ export default function Router() {
         { element: <IndexPage />, index: true },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
+        { path: 'Object-Detection', element: <ObjectDetectionPage /> },
+        { path: 'Machine-Translation', element: <MachineTranslationPage /> },
+        { path: 'Hate-Speech-detection', element: <HateSpeechDetectionPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },
