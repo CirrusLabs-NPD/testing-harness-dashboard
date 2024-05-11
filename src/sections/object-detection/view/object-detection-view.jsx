@@ -10,23 +10,6 @@ export default function ObjectDetectionView() {
   };
   return (
     <>
-      {/* Side menu */}
-      {/* <Box
-        sx={{
-          height: '100%',
-          width: '200px',
-          position: 'fixed',
-          zIndex: 1,
-          top: 0,
-          left: 0,
-          bgcolor: '#f8f9fa',
-          paddingTop: '20px',
-        }}
-      >
-        <a href="{% url 'upload_image' %}">Home</a>
-        <a href="{% url 'dataset' %}">Dataset</a>
-        <a href="{% url 'models' %}">Models</a>
-      </Box> */}
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Object Detection
