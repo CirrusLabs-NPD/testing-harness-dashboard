@@ -26,7 +26,7 @@ export default function Router() {
         </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
+        { element: <ObjectDetectionPage />, index: true },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'Object-Detection', element: <ObjectDetectionPage /> },
