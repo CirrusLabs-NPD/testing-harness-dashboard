@@ -9,6 +9,9 @@ export default function ProductsView() {
       <Typography variant="h4" sx={{ mb: 5 }}>
         Machine Translation
       </Typography>
+      <Typography variant="h4" sx={{ mb: 5 }}>
+        Machine Translation Dashboard
+      </Typography>
     </Container>
   );
 }
