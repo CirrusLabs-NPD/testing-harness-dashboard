@@ -1,13 +1,14 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Tab, Tabs, Button, Container, Typography } from '@mui/material';
 
-
 const ObjectDetectionView = () => {
   const [tabIndex, setTabIndex] = useState(0);
-const [selectedModal,setSelectedModal]=useState("");
-const [outputData, setOutputData] = useState(null); // State to store output data
+  const [selectedModal, setSelectedModal] = useState('');
+  const [outputData, setOutputData] = useState(null); // State to store output data
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
@@ -21,20 +22,20 @@ const [outputData, setOutputData] = useState(null); // State to store output dat
     try {
       const response = await axios.post('http://localhost:8080/upload_image/', formData);
       console.log(response.data); // Handle response as needed
-       // Capture response
-       setOutputData(response.data); // Store response data in state
-       setTabIndex(3); // Switch to the "Output" tab
+      // Capture response
+      setOutputData(response.data); // Store response data in state
+      setTabIndex(3); // Switch to the "Output" tab
       // render the response on output ui
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
 
-  const handleModelChange =(event)=>{
-    setSelectedModal(event.target.value)
-  }
+  const handleModelChange = (event) => {
+    setSelectedModal(event.target.value);
+    setTabIndex((prev) => prev + 1);
+  };
 
-  useEffect(()=>{setTabIndex(3)},[selectedModal])
   return (
     <>
       <Container>
@@ -87,28 +88,27 @@ const [outputData, setOutputData] = useState(null); // State to store output dat
                 </form>
               </div>
             </>
-           )}
-           {tabIndex === 2 && (
-             <Container
-               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
-             >
-               <Typography variant="h6"> Datasets</Typography>
-               <select style={{ padding: '0.5rem 5px 0.5rem 5px' }}>
-                 <option>Select Dataset</option>
-                 <option value="yghcgh">option A</option>
-                 <option>option A</option>
-                 <option>option A</option>
-               </select>
-               <Typography variant="h6"> Models</Typography>
-               <select style={{ padding: '0.5rem 5px 0.5rem 5px'}} onChange={handleModelChange}>
-                 <option>Select Model</option>
-                 <option value="Yolov8">Yolov8</option>
-                 <option value="ReSnet">ReSnet</option>
-                 <option value= "FasterrCnn">FasterrCnn</option>
-               </select>
-               
-             </Container>
-           )}  
+          )}
+          {tabIndex === 2 && (
+            <Container
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+            >
+              <Typography variant="h6"> Datasets</Typography>
+              <select style={{ padding: '0.5rem 5px 0.5rem 5px' }}>
+                <option>Select Dataset</option>
+                <option value="yghcgh">option A</option>
+                <option>option A</option>
+                <option>option A</option>
+              </select>
+              <Typography variant="h6"> Models</Typography>
+              <select style={{ padding: '0.5rem 5px 0.5rem 5px' }} onChange={handleModelChange}>
+                <option>Select Model</option>
+                <option value="Yolov8">Yolov8</option>
+                <option value="ReSnet">ReSnet</option>
+                <option value="FasterrCnn">FasterrCnn</option>
+              </select>
+            </Container>
+          )}
           {tabIndex === 3 && (
             <Container
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
@@ -125,15 +125,14 @@ const [outputData, setOutputData] = useState(null); // State to store output dat
                   borderRadius: '0.5rem',
                 }}
               >
-                 {outputData ? (
+                {outputData ? (
                   <pre>{JSON.stringify(outputData, null, 2)}</pre>
                 ) : (
                   'No output available'
                 )}
               </div>
             </Container>
-         )}
-         
+          )}
         </Container>
       </Container>
     </>
