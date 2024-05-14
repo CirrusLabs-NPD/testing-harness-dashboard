@@ -1,13 +1,40 @@
-import { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 import { Tab, Tabs, Button, Container, Typography } from '@mui/material';
 
-export default function ObjectDetectionView() {
+
+const ObjectDetectionView = () => {
   const [tabIndex, setTabIndex] = useState(0);
+const [selectedModal,setSelectedModal]=useState("");
+const [outputData, setOutputData] = useState(null); // State to store output data
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
+
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+
+    try {
+      const response = await axios.post('http://localhost:8080/upload_image/', formData);
+      console.log(response.data); // Handle response as needed
+       // Capture response
+       setOutputData(response.data); // Store response data in state
+       setTabIndex(3); // Switch to the "Output" tab
+      // render the response on output ui
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  };
+
+  const handleModelChange =(event)=>{
+    setSelectedModal(event.target.value)
+  }
+
+  useEffect(()=>{setTabIndex(3)},[selectedModal])
   return (
     <>
       <Container>
@@ -15,14 +42,12 @@ export default function ObjectDetectionView() {
           Object Detection
         </Typography>
       </Container>
-      {/* Main content */}
       <Container>
         <Tabs value={tabIndex} onChange={handleTabChange} aria-label="Object Detection Tabs">
           <Tab label="Object Detection Models Testing" />
           <Tab label="Upload Dataset" />
-          <Tab label="Model Output" />
           <Tab label="Models" />
-          <Tab label="Show Image" />
+          <Tab label="Output" />
         </Tabs>
         <Container sx={{ mt: 3 }}>
           {tabIndex === 0 && (
@@ -43,32 +68,48 @@ export default function ObjectDetectionView() {
                   encType="multipart/form-data"
                   style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
                 >
-                  {/* Replace {% csrf_token %} with a proper CSRF token */}
-                  <input type="file" name="image" multiple />
+                  <input type="file" name="image" multiple onChange={handleImageUpload} />
                   <Button variant="outlined" style={{ margin: '1rem 0 1rem 0' }}>
                     Upload Images
                   </Button>
                 </form>
               </div>
-
               <div className="form-container">
                 <form
                   method="post"
                   encType="multipart/form-data"
                   style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
                 >
-                  {/* Replace {% csrf_token %} with a proper CSRF token */}
                   <input type="file" name="dataset" multiple webkitdirectory />
-
                   <Button variant="outlined" style={{ margin: '1rem 0 1rem 0' }}>
                     Upload Dataset
                   </Button>
                 </form>
               </div>
             </>
-          )}
-
-          {tabIndex === 2 && (
+           )}
+           {tabIndex === 2 && (
+             <Container
+               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+             >
+               <Typography variant="h6"> Datasets</Typography>
+               <select style={{ padding: '0.5rem 5px 0.5rem 5px' }}>
+                 <option>Select Dataset</option>
+                 <option value="yghcgh">option A</option>
+                 <option>option A</option>
+                 <option>option A</option>
+               </select>
+               <Typography variant="h6"> Models</Typography>
+               <select style={{ padding: '0.5rem 5px 0.5rem 5px'}} onChange={handleModelChange}>
+                 <option>Select Model</option>
+                 <option value="Yolov8">Yolov8</option>
+                 <option value="ReSnet">ReSnet</option>
+                 <option value= "FasterrCnn">FasterrCnn</option>
+               </select>
+               
+             </Container>
+           )}  
+          {tabIndex === 3 && (
             <Container
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
             >
@@ -84,29 +125,19 @@ export default function ObjectDetectionView() {
                   borderRadius: '0.5rem',
                 }}
               >
-                Output
+                 {outputData ? (
+                  <pre>{JSON.stringify(outputData, null, 2)}</pre>
+                ) : (
+                  'No output available'
+                )}
               </div>
             </Container>
-          )}
-          {tabIndex === 3 && (
-            <Container
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
-            >
-              <Typography variant="h6">Models</Typography>
-              <select style={{ padding: '0.5rem 5px 0.5rem 5px' }}>
-                <option>Select Dataset</option>
-                <option>option A</option>
-                <option>option A</option>
-                <option>option A</option>
-              </select>
-              <Button variant="outlined" style={{ margin: '1rem 0 1rem 0' }}>
-                Select Model
-              </Button>
-            </Container>
-          )}
-          {tabIndex === 4 && <Typography variant="h6">Show Image</Typography>}
+         )}
+         
         </Container>
       </Container>
     </>
   );
-}
+};
+
+export default ObjectDetectionView;
