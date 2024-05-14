@@ -20,3 +20,12 @@
 - Add Login
 - Add user management (optional as per need).
 - Add Blog section (optional as per need).
+
+## Steps to run on local machine 
+
+- Clone [Tesing Harness](https://github.com/CirrusLabs-NPD/testing-harness-dashboard.git) repository in your machine.
+- In the current version of dashboard, you should setup the [Testing Harness Backend](https://github.com/CirrusLabs-NPD/testing-harness-backend-monorepo.git) to spin-up your backend service.
+
+## Contributions
+
+- Follow [Engineering Standards](https://github.com/CirrusLabs-NPD/Engineering-Standards)
