@@ -92,8 +92,8 @@ function Dashboard() {
       </Typography>
       <Typography variant="body2">
         Welcome to the Machine Translation platform where we plan to allow the user to test either a
-        dataset of their own or the provided datasets against three machine translation models and
-        view metric results to determine the best model for that use case.
+        dataset of their own or the provided datasets against two machine translation models and
+        view metric results to determine the best model for that use case!!
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -116,7 +116,7 @@ function Dashboard() {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5">Models to test against:</Typography>
-          <FormControlLabel
+          {/* <FormControlLabel
             control={
               <Checkbox
                 checked={selectedModels.includes('Google T5')}
@@ -125,7 +125,7 @@ function Dashboard() {
               />
             }
             label="Google T5"
-          />
+          /> */}
           <FormControlLabel
             control={
               <Checkbox
