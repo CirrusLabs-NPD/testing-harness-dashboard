@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
+import parse from 'html-react-parser';
 import React, { useState } from 'react';
 
 import { Tab, Tabs, Button, Container, Typography } from '@mui/material';
@@ -142,11 +143,7 @@ const ObjectDetectionView = () => {
                   borderRadius: '0.5rem',
                 }}
               >
-                {outputData ? (
-                  <pre><code>{JSON.stringify(outputData, null, 2)}</code></pre>
-                ) : (
-                  'No output available'
-                )}
+                {outputData ? parse(outputData) : 'No output available'}
               </div>
             </Container>
           )}
