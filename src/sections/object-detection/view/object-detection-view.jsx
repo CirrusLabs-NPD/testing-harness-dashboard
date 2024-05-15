@@ -43,7 +43,7 @@ const ObjectDetectionView = () => {
       setSelectedModal(event.target.value);
 
       const response = await axios.get(
-        `http://127.0.0.1:8080/obj_models/run_model/${selectedModal}/`
+        `http://127.0.0.1:8080/obj_models/run_model/${event.target.value}/`
       );
       const metrics = response.data;
       setOutputData(metrics);
@@ -143,7 +143,7 @@ const ObjectDetectionView = () => {
                 }}
               >
                 {outputData ? (
-                  <pre>{JSON.stringify(outputData, null, 2)}</pre>
+                  <pre><code>{JSON.stringify(outputData, null, 2)}</code></pre>
                 ) : (
                   'No output available'
                 )}
