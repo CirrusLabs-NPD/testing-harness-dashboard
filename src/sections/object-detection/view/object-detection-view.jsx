@@ -4,13 +4,13 @@ import axios from 'axios';
 import parse from 'html-react-parser';
 import React, { useState } from 'react';
 
-import { Tab, Tabs, Button, Container, Typography } from '@mui/material';
+import { Tab, Box, Tabs, Button, Container, Typography, CircularProgress } from '@mui/material';
 
 const ObjectDetectionView = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [selectedModal, setSelectedModal] = useState('');
   const [outputData, setOutputData] = useState(null); // State to store output data
-
+  const [loading, setLaoding] = useState(false);
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
@@ -42,15 +42,17 @@ const ObjectDetectionView = () => {
     event.preventDefault();
     try {
       setSelectedModal(event.target.value);
-
+      setLaoding(true);
       const response = await axios.get(
         `http://127.0.0.1:8080/obj_models/run_model/${event.target.value}/`
       );
       const metrics = response.data;
       setOutputData(metrics);
       setTabIndex((prev) => prev + 1);
+      setLaoding(false);
     } catch (error) {
       console.log('Error:', error);
+      setLaoding(false);
     }
   };
 
@@ -61,6 +63,7 @@ const ObjectDetectionView = () => {
           Object Detection
         </Typography>
       </Container>
+
       <Container>
         <Tabs value={tabIndex} onChange={handleTabChange} aria-label="Object Detection Tabs">
           <Tab label="Object Detection Models Testing" />
@@ -111,20 +114,36 @@ const ObjectDetectionView = () => {
             <Container
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
             >
-              <Typography variant="h6"> Datasets</Typography>
-              <select style={{ padding: '0.5rem 5px 0.5rem 5px' }}>
-                <option>Select Dataset</option>
-                <option value="yghcgh">option A</option>
-                <option>option A</option>
-                <option>option A</option>
-              </select>
-              <Typography variant="h6"> Models</Typography>
-              <select style={{ padding: '0.5rem 5px 0.5rem 5px' }} onChange={handleModelChange}>
-                <option>Select Model</option>
-                <option value="Yolov8">Yolov8</option>
-                <option value="ReSnet">ReSnet</option>
-                <option value="FasterrCnn">FasterrCnn</option>
-              </select>
+              {loading ? (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '75%',
+                    height: '300px',
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <>
+                  <Typography variant="h6"> Datasets</Typography>
+                  <select style={{ padding: '0.5rem 5px 0.5rem 5px' }}>
+                    <option>Select Dataset</option>
+                    <option value="yghcgh">option A</option>
+                    <option>option A</option>
+                    <option>option A</option>
+                  </select>
+                  <Typography variant="h6"> Models</Typography>
+                  <select style={{ padding: '0.5rem 5px 0.5rem 5px' }} onChange={handleModelChange}>
+                    <option>Select Model</option>
+                    <option value="Yolov8">Yolov8</option>
+                    <option value="ReSnet">ReSnet</option>
+                    <option value="FasterrCnn">FasterrCnn</option>
+                  </select>
+                </>
+              )}
             </Container>
           )}
           {tabIndex === 3 && (
