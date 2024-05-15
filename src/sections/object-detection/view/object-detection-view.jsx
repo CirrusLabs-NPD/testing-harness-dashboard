@@ -20,7 +20,9 @@ const ObjectDetectionView = () => {
     formData.append('image', e.target.files[0]);
 
     try {
-      const response = await axios.post('http://localhost:8080/upload_image/', formData);
+      const response = await axios.post(
+        `http://127.0.0.1:8080/obj_models/run_model/${selectedModal}/`
+      );
       console.log(response.data); // Handle response as needed
       // Capture response
       setOutputData(response.data); // Store response data in state
@@ -31,9 +33,24 @@ const ObjectDetectionView = () => {
     }
   };
 
-  const handleModelChange = (event) => {
-    setSelectedModal(event.target.value);
-    setTabIndex((prev) => prev + 1);
+  // const handleModelChange = (event) => {
+  //   setSelectedModal(event.target.value);
+  //   setTabIndex((prev) => prev + 1);
+  // };
+  const handleModelChange = async (event) => {
+    event.preventDefault();
+    try {
+      setSelectedModal(event.target.value);
+
+      const response = await axios.get(
+        `http://127.0.0.1:8080/obj_models/run_model/${selectedModal}/`
+      );
+      const metrics = response.data;
+      setOutputData(metrics);
+      setTabIndex((prev) => prev + 1);
+    } catch (error) {
+      console.log('Error:', error);
+    }
   };
 
   return (
