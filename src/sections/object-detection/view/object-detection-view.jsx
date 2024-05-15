@@ -30,9 +30,25 @@ const [outputData, setOutputData] = useState(null); // State to store output dat
     }
   };
 
-  const handleModelChange =(event)=>{
-    setSelectedModal(event.target.value)
-  }
+  const handleModelChange = async (event)=>{
+    event.preventDefault();
+    try {
+      setSelectedModal(event.target.value)
+      console.log("Model:", selectedModal)
+      const response = await axios.get(
+        'http://localhost:8080/obj_models/show_output/',
+        {
+          model_name: selectedModal,
+        }
+      );
+      console.log(response.data)
+      const metrics = response.data;
+      setOutputData(metrics);
+    } catch(error) {
+      console.log("Error:", error)
+    }
+    
+  };
 
   useEffect(()=>{setTabIndex(3)},[selectedModal])
   return (
