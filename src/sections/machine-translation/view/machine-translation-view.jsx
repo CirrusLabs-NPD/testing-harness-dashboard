@@ -93,7 +93,7 @@ function Dashboard() {
       <Typography variant="body2">
         Welcome to the Machine Translation platform where we plan to allow the user to test either a
         dataset of their own or the provided datasets against two machine translation models and
-        view metric results to determine the best model for that use case!
+        view metric results to determine the best model for that use case!!
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
