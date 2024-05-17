@@ -29,3 +29,19 @@
 ## Contributions
 
 - Follow [Engineering Standards](https://github.com/CirrusLabs-NPD/Engineering-Standards)
+
+Machine Translation
+Looks at the accuracy of translation between different languages, specifically EN/FR.
+
+Demo
+https://cirruslabsio-my.sharepoint.com/:v:/g/personal/shaqib_malik_cirruslabs_io/ETrz8kwEzc1GihgDPxcQNQwB9UJN786_t8msTQwAiwZd9g
+
+Installation
+Clone the frontend portion of the project with the repository link from Github.
+
+Deployment
+To deploy this project in the terminal, run:
+
+yarn dev
+
+Click on http://localhost:3030/ to open the UI.
