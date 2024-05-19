@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
 import { Tab, Tabs, Grid, Paper, Button, Container, TextField, Typography } from '@mui/material';
+import InfoModal from './InfoModal';
 
 function HateSpeechDetectionView() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -9,6 +9,7 @@ function HateSpeechDetectionView() {
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
@@ -50,6 +51,14 @@ function HateSpeechDetectionView() {
     console.log(results.heatmap_image_path);
   };
 
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Container>
       <Typography variant="h4" sx={{ mb: 5 }}>
@@ -68,6 +77,9 @@ function HateSpeechDetectionView() {
             speech detection models to evaluate their performance. Select a model and upload a
             dataset to begin testing.
           </Typography>
+          <Button variant="contained" color="primary" onClick={handleModalOpen} sx={{ mt: 2 }}>
+            Why does your business need an effective hate speech detection model?
+          </Button>
         </Container>
       )}
 
@@ -110,6 +122,21 @@ function HateSpeechDetectionView() {
               </Typography>
             )}
           </form>
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            Data Preprocessing Requirements
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            Our script can accept json files formatted in the following structure:
+          </Typography>
+          <img
+            src="/assets/datarequirement.jpg"
+            alt="JSON Requirement Example"
+            style={{ marginTop: '20px', maxWidth: '100%' }}
+          />
+          <Typography variant="body1" sx={{ mt: 2 }}>
+          &apos;generated text&apos; is the speech from your platform users. For &apos;score&apos; 0 is not-hate-speech and 1 is-hate-speech and it is the pre-determined score for the model to compare its results with and generate an accuracy metric for your evaluation of its effectiveness
+          </Typography>
+          
         </Container>
       )}
 
@@ -189,6 +216,8 @@ function HateSpeechDetectionView() {
           )}
         </Container>
       )}
+
+      <InfoModal open={isModalOpen} handleClose={handleModalClose} />
     </Container>
   );
 }
