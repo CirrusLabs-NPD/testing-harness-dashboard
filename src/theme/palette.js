@@ -6,30 +6,34 @@ import { alpha } from '@mui/material/styles';
 
 export const grey = {
   0: '#FFFFFF',
-  100: '#F9FAFB',
-  200: '#F4F6F8',
+  100: '#F1F1F1', // CL Background color
+  200: '#F1F1F1', // CL Background color
   300: '#DFE3E8',
   400: '#C4CDD5',
-  500: '#919EAB',
-  600: '#637381',
+  500: '#000929', // CL Normal text color
+  600: '#000929', // CL Normal text color
   700: '#454F5B',
-  800: '#212B36',
+  800: '#000929', // CL Normal text color
   900: '#161C24',
 };
 
 export const primary = {
   lighter: '#D0ECFE',
   light: '#73BAFB',
-  main: '#1877F2',
+  main: '#D5292B', // CL Button Color
   dark: '#0C44AE',
   darker: '#042174',
   contrastText: '#FFFFFF',
 };
 
+export const background = {
+  main: '#F1F1F1', // CL Background color for screen since we have no header for #FAFAFA
+}
+
 export const secondary = {
   lighter: '#EFD6FF',
   light: '#C684FF',
-  main: '#8E33FF',
+  main: '#000929', // CL Normal text color
   dark: '#5119B7',
   darker: '#27097A',
   contrastText: '#FFFFFF',
@@ -111,7 +115,7 @@ export function palette() {
       disabled: grey[500],
     },
     background: {
-      paper: '#FFFFFF',
+      paper: '#F1F1F1', // CL Background color
       default: grey[100],
       neutral: grey[200],
     },
