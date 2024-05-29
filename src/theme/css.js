@@ -15,12 +15,12 @@ export const paper = ({ theme, bgcolor, dropdown }) => ({
       color: bgcolor,
     }),
   }),
-  backgroundImage: 'url(/assets/cyan-blur.png), url(/assets/red-blur.png)',
-  backgroundRepeat: 'no-repeat, no-repeat',
-  backgroundPosition: 'top right, left bottom',
-  backgroundSize: '50%, 50%',
+  backgroundImage: 'url(/assets/bgimg.png)',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
   ...(theme.direction === 'rtl' && {
-    backgroundPosition: 'top left, right bottom',
+    backgroundPosition: 'center',
   }),
   ...(dropdown && {
     padding: theme.spacing(0.5),
