@@ -73,8 +73,16 @@ function HateSpeechDetectionView() {
       {tabIndex === 0 && (
         <Container>
           <Typography variant="body1" sx={{ mt: 2 }}>
-            Welcome to the Hate Speech Model Testing Platform. Here, you can test various hate
-            speech detection models to evaluate their performance. Select a model and upload a
+            Welcome to the Hate Speech Model Testing Platform.
+          </Typography>
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            Purpose
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            Designed to provide you with a robust framework for 
+            evaluating the performance of various hate speech detection ML models on JSON speech datasets. This platform 
+            returns detailed performance metrics, allowing your
+            data scientists to make informed decisions about model improvements or replacements. Input your Hugging Face model&apos;s name and upload a
             dataset to begin testing.
           </Typography>
           <Button variant="contained" color="primary" onClick={handleModalOpen} sx={{ mt: 2 }}>
@@ -126,7 +134,7 @@ function HateSpeechDetectionView() {
             Data Preprocessing Requirements
           </Typography>
           <Typography variant="body1" sx={{ mt: 2 }}>
-            Our script can accept json files formatted in the following structure:
+            Model name asks your choice of model from hugging face for eg. alexandrainst/da-hatespeech-detection-base. <br />Our backend script can process JSON files formatted in the following structure:
           </Typography>
           <img
             src="/assets/datarequirement.jpg"
@@ -134,7 +142,7 @@ function HateSpeechDetectionView() {
             style={{ marginTop: '20px', maxWidth: '100%' }}
           />
           <Typography variant="body1" sx={{ mt: 2 }}>
-          &apos;generated text&apos; is the speech from your platform users. For &apos;score&apos; 0 is not-hate-speech and 1 is-hate-speech and it is the pre-determined score for the model to compare its results with and generate an accuracy metric for your evaluation of its effectiveness
+          &apos;generated text&apos; is the speech from your platform users. For &apos;score&apos; 0 is not-hate-speech and 1 is-hate-speech and it is the pre-determined actual score for the model to compare its predictions with and generate an accuracy metric for your evaluation of its effectiveness
           </Typography>
           
         </Container>
